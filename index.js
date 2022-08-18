@@ -3,9 +3,9 @@ const app= express();
 const bodyParser= require("body-parser");
 const cors= require('cors')
 const jwt = require("jsonwebtoken");
+const auth = require("./autenticacao")
 
-const JWTSecret = "skaoksoaksoaksokasokasoka";
-
+const JWTSecret = require("./Secret");
 app.use(cors());
 
 app.use(bodyParser.urlencoded({extended:false}))
@@ -51,7 +51,7 @@ var DB={
     ]
 
 }
-app.get('/games',(req, res)=>{
+app.get('/games',auth,(req, res)=>{
     res.status(200).json(DB.games)
 })
 
